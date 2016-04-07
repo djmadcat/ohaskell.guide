@@ -5,7 +5,7 @@ module CreateHtml (
 ) where
 
 import           Hakyll
-import           Hakyll.Contrib.Hyphenation (hyphenateHtml, russian)
+-- import           Hakyll.Contrib.Hyphenation (hyphenateHtml, russian)
 import           Control.Exception          (finally)
 
 import           PrepareHtmlTOC
@@ -72,7 +72,7 @@ createChapters = match chapters $ do
     route $ removeChaptersDirectoryFromURLs
             `composeRoutes` removeChapterNumberFromURLs
             `composeRoutes` setExtension "html"
-    compile $ pandocCompiler >>= hyphenateHtml russian -- Переносы только в русских словах.
+    compile $ pandocCompiler -- >>= hyphenateHtml russian -- Переносы только в русских словах.
                              >>= loadAndApplyTemplate chapterTemplateName defaultContext
                              >>= loadAndApplyTemplate defaulTemplateName defaultContext
                              >>= relativizeUrls

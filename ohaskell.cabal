@@ -32,6 +32,7 @@ executable ohaskell
   build-depends:       base
                      , text
                      , hakyll
+                     , hakyll-contrib-hyphenation
                      , blaze-html
                      , blaze-markup
                      , clay

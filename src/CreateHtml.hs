@@ -72,8 +72,7 @@ createChapters = match chapters $ do
     route $ removeChaptersDirectoryFromURLs
             `composeRoutes` removeChapterNumberFromURLs
             `composeRoutes` setExtension "html"
-
-    compile $ pandocCompiler >>= hyphenateHtml russian
+    compile $ pandocCompiler >>= hyphenateHtml russian -- Переносы только в русских словах.
                              >>= loadAndApplyTemplate chapterTemplateName defaultContext
                              >>= loadAndApplyTemplate defaulTemplateName defaultContext
                              >>= relativizeUrls

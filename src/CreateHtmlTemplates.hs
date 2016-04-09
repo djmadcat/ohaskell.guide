@@ -207,8 +207,8 @@ commonHead customTitle = H.head $ do
     link ! rel "icon" ! href "/static/images/favicon.ico"
     link ! rel "stylesheet" ! href "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
     script ! src "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" $ ""
-    link ! rel "stylesheet" ! href "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"
-    script ! src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js" $ ""
+    link ! rel "stylesheet" ! href "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css"
+    script ! src "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js" $ ""
     link ! rel "stylesheet" ! href "/static/css/default.css"
     script ! src "/static/js/default.js" $ ""
 

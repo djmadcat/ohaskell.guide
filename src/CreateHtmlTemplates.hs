@@ -53,39 +53,45 @@ createCover = docTypeHtml ! lang "ru" $ do
                     div ! class_ "col s12 m1 l1" $
                         preEscapedToHtml ("&nbsp;" :: String)
 
-                    div ! class_ "col s12 m10 l10" $
-                        div ! class_ "row" $ do
-                            div ! class_ "col s12 l3" $ do
-                                a ! class_ "waves-effect waves-light btn btn-large blue accent-2 get-button sans"
-                                  ! href "/init.html" $ do
-                                    H.span ! class_ "sans" ! A.style "text-transform: none;" $ "Web"
-                                    H.span ! A.style "padding-right: 10px;" $ ""
-                                    H.i ! class_ "fa fa-cloud" ! A.style "font-size: 20px;" $ ""
-                                div ! class_ "get-button-separator" $ ""
+                    -- div ! class_ "col s12 m10 l10" $ do
+                    div ! class_ "col s12 m12 l2" $ do
+                        a ! class_ "waves-effect waves-light btn btn-large blue accent-2 get-button sans"
+                          ! href "/init.html" $ do
+                            H.span ! class_ "sans" ! A.style "text-transform: none;" $ "WWW"
+                        div ! class_ "get-button-separator" $ ""
 
-                            div ! class_ "col s12 l3" $ do
-                                a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
-                                  ! href "https://www.ohaskell.guide/pdf/ohaskell.pdf" $ do
-                                    H.span ! class_ "sans" $ "PDF"
-                                    H.span ! A.style "padding-right: 10px;" $ ""
-                                    H.i ! class_ "fa fa-desktop" ! A.style "font-size: 20px;" $ ""
-                                div ! class_ "get-button-separator" $ ""
+                    div ! class_ "col s12 m12 l2" $ do
+                        a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
+                          ! href "https://www.ohaskell.guide/pdf/ohaskell.pdf"
+                          ! A.title "Для больших экранов" $ do
+                            H.span ! class_ "sans" $ "PDF"
+                            H.span ! A.style "padding-right: 7px;" $ ""
+                            H.i ! class_ "fa fa-desktop" ! A.style "font-size: 20px;" $ ""
+                        div ! class_ "get-button-separator" $ ""
 
-                            div ! class_ "col s12 l3" $ do
-                                a ! class_ "waves-effect waves-light btn btn-large red lighten-1 get-button sans"
-                                  ! href "https://www.ohaskell.guide/pdf/ohaskell-mobile.pdf" $ do
-                                    H.span ! class_ "sans" $ "PDF"
-                                    H.span ! A.style "padding-right: 10px;" $ ""
-                                    H.i ! class_ "fa fa-tablet" ! A.style "font-size: 20px;" $ ""
-                                div ! class_ "get-button-separator" $ ""
+                    div ! class_ "col s12 m12 l2" $ do
+                        a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
+                          ! href "https://www.ohaskell.guide/pdf/ohaskell-mobile.pdf"
+                          ! A.title "Для экранов мобильных устройств" $ do
+                            H.span ! class_ "sans" $ "PDF"
+                            H.span ! A.style "padding-right: 7px;" $ ""
+                            H.i ! class_ "fa fa-tablet" ! A.style "font-size: 20px;" $ ""
+                        div ! class_ "get-button-separator" $ ""
 
-                            div ! class_ "col s12 l3" $ do
-                                a ! class_ "waves-effect waves-light btn btn-large light-green darken-1 get-button sans"
-                                  ! href "https://www.ohaskell.guide/epub/ohaskell.epub" $ do
-                                    H.span ! class_ "sans" $ "EPUB"
-                                    H.span ! A.style "padding-right: 10px;" $ ""
-                                    H.i ! class_ "fa fa-book" ! A.style "font-size: 20px;" $ ""
-                                div ! class_ "get-button-separator" $ ""
+                    div ! class_ "col s12 m12 l2" $ do
+                        a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
+                          ! href "https://www.ohaskell.guide/pdf/ohaskell-printable.pdf"
+                          ! A.title "Для чёрно-белой печати A4" $ do
+                            H.span ! class_ "sans" $ "PDF"
+                            H.span ! A.style "padding-right: 7px;" $ ""
+                            H.i ! class_ "fa fa-print" ! A.style "font-size: 20px;" $ ""
+                        div ! class_ "get-button-separator" $ ""
+
+                    div ! class_ "col s12 m12 l2" $ do
+                        a ! class_ "waves-effect waves-light btn btn-large light-green darken-1 get-button sans"
+                          ! href "https://www.ohaskell.guide/epub/ohaskell.epub" $ do
+                            H.span ! class_ "sans" $ "EPUB"
+                        div ! class_ "get-button-separator" $ ""
 
                     div ! class_ "col s12 m1 l1" $
                         preEscapedToHtml ("&nbsp;" :: String)

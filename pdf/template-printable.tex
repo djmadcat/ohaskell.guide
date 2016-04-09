@@ -23,18 +23,11 @@
 
 % Задаём метаданные и характеристики гиперссылок.
 \usepackage{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\PassOptionsToPackage{usenames,dvipsnames}{color}
 \hypersetup{unicode=true,
             pdftitle={О Haskell по-человечески},
             pdfauthor={Денис Шевченко},
-            pdfsubject={Ваша первая книга о языке программирования Haskell},
-            %colorlinks=true,
-            %linkcolor=Black,
-            %citecolor=Black,
-            %urlcolor=Black,
-            %pdfborder={0 0 0},
-            %breaklinks=true,
-            hyperfootnotes=true}
+            pdfsubject={Ваша первая книга о языке программирования Haskell}}
 % Шрифт гиперссылок не моноширинный.
 \urlstyle{same}
 
@@ -91,6 +84,11 @@
 
 % Для вставки полноразмерных PDF-страниц без полей.
 \usepackage{pdfpages}
+
+$if(printable-version)$
+% Делаем гиперссылки сносками внизу страниц.
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
 
 % Титульная страница книги.
 \newcommand*{\ohaskelltitle}{\begingroup

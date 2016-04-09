@@ -6,6 +6,7 @@ import           CreateEpub
 import           CreateHtml
 import           CreateHtmlTemplates
 
+import           Data.List                  (intercalate)
 import           Control.Monad              (when)
 import           Control.Concurrent.Async   (async, wait)
 import           System.Environment         (getArgs, withArgs)
@@ -56,17 +57,12 @@ buildHtmlIfNecessary args chapterPoints =
 check :: [String] -> IO ()
 check args =
     when someInvalidArgs $ do
-        putStrLn $ "Usage: ohaskell ["  ++ pdf ++
-                                    "|" ++ pdfPrintable ++
-                                    "|" ++ epub ++
-                                    "|" ++ html ++ "]"
+        putStrLn $ "Usage: ohaskell [" ++ intercalate "|" validArgs ++ "]"
         exitFailure
   where
     someInvalidArgs = not . null $ filter invalid args
-    invalid arg     =    arg /= pdf
-                      && arg /= pdfPrintable
-                      && arg /= epub
-                      && arg /= html
+    invalid arg     = arg `notElem` validArgs
+    validArgs       = [pdf, pdfPrintable, epub, html]
 
 buildAllOrJust :: String -> [String] -> Bool
 buildAllOrJust some args = some `elem` args || null args

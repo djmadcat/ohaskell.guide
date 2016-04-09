@@ -50,7 +50,7 @@ createPdfPrintable pathToSingleMarkdown =
     callCommand $ concat [ "pandoc --latex-engine="
                          , pdfEngine
                          , " --template="
-                         , templatePrintable
+                         , template
                          , " -V fontsize=\"11pt\""
                          , " -V classoption=\"oneside\""
                          , " -V geometry=\"headsep=11mm\""
@@ -59,17 +59,17 @@ createPdfPrintable pathToSingleMarkdown =
                          , " -V geometry=\"left=30mm\""
                          , " -V geometry=\"right=30mm\""
                          , " -V geometry=\"paper=a4paper\""
+                         , " -V printable-version" -- Флаг включает особые опции.
                          , " -o "
                          , outPrintable
                          , " "
                          , pathToSingleMarkdown
                          ]
 
-pdfEngine, template, templatePrintable, outDesktop, outMobile, outPrintable :: String
-pdfEngine           = "xelatex"
-template            = "pdf/template.tex"
-templatePrintable   = "pdf/template-printable.tex"
-outDesktop          = "pdf/ohaskell.pdf"
-outMobile           = "pdf/ohaskell-mobile.pdf"
-outPrintable        = "pdf/ohaskell-printable.pdf"
+pdfEngine, template, outDesktop, outMobile, outPrintable :: String
+pdfEngine    = "xelatex"
+template     = "pdf/template.tex"
+outDesktop   = "pdf/ohaskell.pdf"
+outMobile    = "pdf/ohaskell-mobile.pdf"
+outPrintable = "pdf/ohaskell-printable.pdf"
 

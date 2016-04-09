@@ -35,27 +35,27 @@ $ stack exec -- ohaskell
 3. PDF для чёрно-белой печати A4: `pdf/ohaskell-printable.pdf`.
 4. EPUB: `epub/ohaskell.epub`.
 
-Однако вы можете собрать лишь нужные вам варианты:
+Однако вы можете собрать лишь нужные вам варианты.
 
-1. Для HTML:
+HTML:
 
 ```bash
 $ stack exec -- ohaskell --html
 ```
 
-2. Для PDF, варианты для экранов:
+PDF, оба варианта для экранов:
 
 ```bash
 $ stack exec -- ohaskell --pdf
 ```
 
-3. Для PDF, вариант для печати:
+PDF, вариант для печати:
 
 ```bash
 $ stack exec -- ohaskell --pdf-printable
 ```
 
-4. Для EPUB:
+EPUB:
 
 ```bash
 $ stack exec -- ohaskell --epub

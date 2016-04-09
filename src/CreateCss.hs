@@ -90,7 +90,7 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
     blockquote ? do
         marginLeft      nil
         paddingLeftPx   20
-        color           "#777"
+        color           "#666"
         borderLeft      solid (px 5) "#ee6e73"
 
     ".cover-title" ? do
@@ -111,7 +111,7 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
         monoFont
 
     ".get-button" ?
-        width (px 138)
+        width (px 128)
 
     ".get-button-separator" ?
         paddingBottomPx 25

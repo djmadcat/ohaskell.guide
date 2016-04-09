@@ -91,14 +91,16 @@ main = do
         putStrLn $ "Собираем..."
         callProcess "stack" ["exec", "--", "ohaskell"]
 
-    fullWeb         = "_site"
-    pdfBinary       = "ohaskell.pdf"
-    pdfMobileBinary = "ohaskell-mobile.pdf"
-    epubBinary      = "ohaskell.epub"
+    fullWeb            = "_site"
+    pdfBinary          = "ohaskell.pdf"
+    pdfMobileBinary    = "ohaskell-mobile.pdf"
+    pdfPrintableBinary = "ohaskell-printable.pdf"
+    epubBinary         = "ohaskell.epub"
     storeArtefactsInSite = do
         createDirectory $ fullWeb </> "pdf"
-        copyFile ("pdf" </> pdfBinary)       $ fullWeb </> "pdf" </> pdfBinary
-        copyFile ("pdf" </> pdfMobileBinary) $ fullWeb </> "pdf" </> pdfMobileBinary
+        copyFile ("pdf" </> pdfBinary)          $ fullWeb </> "pdf" </> pdfBinary
+        copyFile ("pdf" </> pdfMobileBinary)    $ fullWeb </> "pdf" </> pdfMobileBinary
+        copyFile ("pdf" </> pdfPrintableBinary) $ fullWeb </> "pdf" </> pdfPrintableBinary
 
         createDirectory $ fullWeb </> "epub"
         copyFile ("epub" </> epubBinary)     $ fullWeb </> "epub" </> epubBinary

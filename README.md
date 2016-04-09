@@ -4,7 +4,7 @@
 
 Ваша первая книга об удивительном и прекрасном языке программирования [Haskell](https://www.haskell.org/).
 
-[![readOnline](https://img.shields.io/badge/read-online-blue.svg)](https://www.ohaskell.guide/init.html)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getPDF](https://img.shields.io/badge/get-PDF-red.svg)](https://www.ohaskell.guide/pdf/ohaskell.pdf)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getPDFMobile](https://img.shields.io/badge/get-PDF%20mobile-orange.svg)](https://www.ohaskell.guide/pdf/ohaskell-mobile.pdf)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getEPUB](https://img.shields.io/badge/get-EPUB-green.svg)](https://www.ohaskell.guide/epub/ohaskell.epub)
+[![readOnline](https://img.shields.io/badge/read-online-blue.svg)](https://www.ohaskell.guide/init.html)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getPDF](https://img.shields.io/badge/get-PDF-red.svg)](https://www.ohaskell.guide/pdf/ohaskell.pdf)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getPDFMobile](https://img.shields.io/badge/get-PDF%20mobile-red.svg)](https://www.ohaskell.guide/pdf/ohaskell-mobile.pdf)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getPDFPrintable](https://img.shields.io/badge/get-PDF%20printable-red.svg)](https://www.ohaskell.guide/pdf/ohaskell-printable.pdf)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![getEPUB](https://img.shields.io/badge/get-EPUB-green.svg)](https://www.ohaskell.guide/epub/ohaskell.epub)
 
 Книга создана с помощью практичного [Markdown](https://help.github.com/categories/writing-on-github/), блистательного [Materialize](http://materializecss.com/), впечатляющего [Hakyll](https://jaspervdj.be/hakyll/), элегантного [Clay](http://fvisser.nl/clay/), гибкого [BlazeHtml](https://jaspervdj.be/blaze/) и мощного [pandoc](http://pandoc.org/). И разумеется, всё это связано воедино силою Haskell. Книга написана при поддержке [русскоязычного сообщества Haskell-разработчиков](http://ruhaskell.org/).
 
@@ -30,8 +30,9 @@ $ stack exec -- ohaskell
 По умолчанию, при запуске `ohaskell` без аргументов, собираются все варианты книги:
 
 1. HTML: `_site/index.html`.
-2. PDF: `pdf/ohaskell.pdf`.
-3. PDF, мобильный вариант: `pdf/ohaskell-mobile.pdf`.
+2. PDF для больших экранов: `pdf/ohaskell.pdf`.
+3. PDF для экранов мобильных устройств: `pdf/ohaskell-mobile.pdf`.
+3. PDF для чёрно-белой печати A4: `pdf/ohaskell-printable.pdf`.
 4. EPUB: `epub/ohaskell.epub`.
 
 Однако вы можете собрать лишь нужные вам варианты:
@@ -42,13 +43,19 @@ $ stack exec -- ohaskell
 $ stack exec -- ohaskell --html
 ```
 
-2. Для PDF:
+2. Для PDF, варианты для экранов:
 
 ```bash
 $ stack exec -- ohaskell --pdf
 ```
 
-3. Для EPUB:
+3. Для PDF, вариант для печати:
+
+```bash
+$ stack exec -- ohaskell --pdf-printable
+```
+
+4. Для EPUB:
 
 ```bash
 $ stack exec -- ohaskell --epub

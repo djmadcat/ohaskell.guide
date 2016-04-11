@@ -14,7 +14,7 @@ import           System.Exit                (exitFailure)
 
 main :: IO ()
 main = do
-    (pathToSingleMarkdown, chapterPoints) <- createSingleMarkdown
+    (pathToSingleMarkdown, chapterPoints, practicePoints) <- createSingleMarkdown
 
     args <- getArgs
     check args
@@ -22,7 +22,7 @@ main = do
     buildEpubIfNecessary            args pathToSingleMarkdown
     buildPdfIfNecessary             args pathToSingleMarkdown
     buildPdfPrintableIfNecessary    args pathToSingleMarkdown
-    buildHtmlIfNecessary            args chapterPoints
+    buildHtmlIfNecessary            args chapterPoints practicePoints
 
 buildEpubIfNecessary :: [String] -> FilePath -> IO ()
 buildEpubIfNecessary args pathToSingleMarkdown =
@@ -46,13 +46,16 @@ buildPdfPrintableIfNecessary args pathToSingleMarkdown =
         buildingVersion pdfPrintable
         createPdfPrintable pathToSingleMarkdown
 
-buildHtmlIfNecessary :: [String] -> [ChapterPoint] -> IO ()
-buildHtmlIfNecessary args chapterPoints =
+buildHtmlIfNecessary :: [String]
+                     -> [ChapterPoint]
+                     -> [ChapterPoint]
+                     -> IO ()
+buildHtmlIfNecessary args chapterPoints practicePoints =
     when (buildAllOrJust html args) $ do
         buildingVersion html
-        createHtmlTemplates chapterPoints
+        createHtmlTemplates chapterPoints practicePoints
         -- Аргумент rebuild нужен для Hakyll.
-        withArgs ["rebuild"] $ createHtml chapterPoints
+        withArgs ["rebuild"] $ createHtml chapterPoints practicePoints
 
 check :: [String] -> IO ()
 check args =

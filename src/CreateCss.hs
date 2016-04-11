@@ -97,12 +97,30 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
         colorBase01
         fontSizePx      48
         paddingTopPx    15
+        marginBottomPx  30
 
-    ".cover-v2" ? do
+    ".book-icon" ? do
+        fontSizePx      130
+        opacity         0.5
+        color           "#448aff"
+
+    ".keyboard-icon" ? do
+        fontSizePx      130
+        opacity         0.5
+        color           "#ffa000"
+
+    ".publish-version" ? do
         colorBase01
-        fontSizePx      22
-        paddingTopPx    20
-        paddingBottomPx 70
+        fontSizePx      18
+        paddingBottomPx 40
+
+    ".read-button" ? do
+        paddingTopPx    40
+        paddingBottomPx 20
+
+    ".practice-button" ? do
+        paddingTopPx    40
+        paddingBottomPx 40
 
     ".sans" ?
         fontFamily ["PT Sans"] [sansSerif]
@@ -111,7 +129,7 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
         monoFont
 
     ".get-button" ?
-        width (px 128)
+        width (px 148)
 
     ".get-button-separator" ?
         paddingBottomPx 25
@@ -177,6 +195,13 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
 
     ".donate-area" ?
         centerAlign
+
+    ".solution-content" ? do
+        padding         (px 20) (px 20) (px 20) (px 20)
+        backgroundColor "#FEFBF3"
+
+    ".collapsible-body" ?
+        p ? padding     (px 0) (px 0) (px 0) (px 0)
 
     pre # ".sourceCode" ? do
         hsCodeBase

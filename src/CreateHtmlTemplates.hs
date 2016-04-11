@@ -15,15 +15,17 @@ import           Text.RawString.QQ
 import           SingleMarkdown
 import           SubjectIndex
 
-createHtmlTemplates :: [ChapterPoint] -> IO ()
-createHtmlTemplates chapterPoints = do
-    writeFile "templates/cover.html"         $ renderHtml   createCover
-    writeFile "templates/default.html"       $ renderHtml $ createDefault chapterPoints
-    writeFile "templates/chapter.html"       $ renderHtml   createChapter
-    writeFile "templates/subject-index.html" $ renderHtml $ createSubjectIndex chapterPoints
-    writeFile "templates/donate.html"        $ renderHtml   createDonate
+createHtmlTemplates :: [ChapterPoint] -> [ChapterPoint] -> IO ()
+createHtmlTemplates chapterPoints practicePoints = do
+    writeFile "templates/cover.html"            $ renderHtml   createCover
+    writeFile "templates/default.html"          $ renderHtml $ createDefault chapterPoints
+    writeFile "templates/default-practice.html" $ renderHtml $ createDefaultPractice practicePoints
+    writeFile "templates/chapter.html"          $ renderHtml   createChapter
+    writeFile "templates/subject-index.html"    $ renderHtml $ createSubjectIndex chapterPoints
+    writeFile "templates/donate.html"           $ renderHtml   createDonate
 
-data Donate = Ask | Skip
+data Donate = ShowDonate | HideDonate
+data Index  = ShowIndex  | HideIndex
 
 createCover :: Html
 createCover = docTypeHtml ! lang "ru" $ do
@@ -37,7 +39,7 @@ createCover = docTypeHtml ! lang "ru" $ do
                     a ! href "https://dshevchenko.biz" ! target "_blank" $
                         "Д. Шевченко"
 
-                contacts Ask
+                contacts ShowDonate
 
         div ! class_ "container" $
             div ! class_ "row center" ! A.style "padding-top: 70px;" $ do
@@ -46,55 +48,54 @@ createCover = docTypeHtml ! lang "ru" $ do
                     H.span ! A.style "font-size: 28px; color: orangered;" $
                         preEscapedToHtml ("&nbsp;&beta;" :: String)
 
-                div ! class_ "cover-v2" $
-                    "издание 2.0"
-
                 div ! class_ "row" $ do
-                    div ! class_ "col s12 m1 l1" $
-                        preEscapedToHtml ("&nbsp;" :: String)
+                    div ! class_ "col s12 m6 l6" $ do
+                        div ! class_ "book-icon" $
+                            H.i ! class_ "fa fa-book" $ ""
 
-                    -- div ! class_ "col s12 m10 l10" $ do
-                    div ! class_ "col s12 m12 l2" $ do
-                        a ! class_ "waves-effect waves-light btn btn-large blue accent-2 get-button sans"
-                          ! href "/init.html" $ do
-                            H.span ! class_ "sans" ! A.style "text-transform: none;" $ "WWW"
-                        div ! class_ "get-button-separator" $ ""
+                        div ! class_ "read-button" $ do
+                            a ! class_ "dropdown-button waves-effect waves-light btn btn-large blue accent-2 get-button sans"
+                              ! href "#"
+                              ! dataAttribute "activates" "dropdownRead" $
+                                "Читать"
 
-                    div ! class_ "col s12 m12 l2" $ do
-                        a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
-                          ! href "https://www.ohaskell.guide/pdf/ohaskell.pdf"
-                          ! A.title "Для больших экранов" $ do
-                            H.span ! class_ "sans" $ "PDF"
-                            H.span ! A.style "padding-right: 7px;" $ ""
-                            H.i ! class_ "fa fa-desktop" ! A.style "font-size: 20px;" $ ""
-                        div ! class_ "get-button-separator" $ ""
+                            ul ! A.id "dropdownRead" ! class_ "dropdown-content sans" $ do
+                                li $ a ! href "/init.html" $
+                                    H.span ! A.style "color: #448aff;" $ "WWW"
 
-                    div ! class_ "col s12 m12 l2" $ do
-                        a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
-                          ! href "https://www.ohaskell.guide/pdf/ohaskell-mobile.pdf"
-                          ! A.title "Для экранов мобильных устройств" $ do
-                            H.span ! class_ "sans" $ "PDF"
-                            H.span ! A.style "padding-right: 7px;" $ ""
-                            H.i ! class_ "fa fa-tablet" ! A.style "font-size: 20px;" $ ""
-                        div ! class_ "get-button-separator" $ ""
+                                li ! class_ "divider" $ ""
 
-                    div ! class_ "col s12 m12 l2" $ do
-                        a ! class_ "waves-effect waves-light btn btn-large red darken-1 get-button sans"
-                          ! href "https://www.ohaskell.guide/pdf/ohaskell-printable.pdf"
-                          ! A.title "Для чёрно-белой печати A4" $ do
-                            H.span ! class_ "sans" $ "PDF"
-                            H.span ! A.style "padding-right: 7px;" $ ""
-                            H.i ! class_ "fa fa-print" ! A.style "font-size: 20px;" $ ""
-                        div ! class_ "get-button-separator" $ ""
+                                li $ a ! href "/pdf/ohaskell.pdf" ! A.style "color: #e53935;" $ do
+                                    H.span "PDF"
+                                    H.span ! A.style "padding-right: 12px;" $ ""
+                                    H.i ! class_ "fa fa-desktop" ! A.style "font-size: 20px;" $ ""
 
-                    div ! class_ "col s12 m12 l2" $ do
-                        a ! class_ "waves-effect waves-light btn btn-large light-green darken-1 get-button sans"
-                          ! href "https://www.ohaskell.guide/epub/ohaskell.epub" $ do
-                            H.span ! class_ "sans" $ "EPUB"
-                        div ! class_ "get-button-separator" $ ""
+                                li $ a ! href "/pdf/ohaskell-mobile.pdf" ! A.style "color: #e53935;" $ do
+                                    H.span "PDF"
+                                    H.span ! A.style "padding-right: 12px;" $ ""
+                                    H.i ! class_ "fa fa-tablet" ! A.style "font-size: 20px;" $ ""
 
-                    div ! class_ "col s12 m1 l1" $
-                        preEscapedToHtml ("&nbsp;" :: String)
+                                li $ a ! href "/pdf/ohaskell-printable.pdf" ! A.style "color: #e53935;" $ do
+                                    H.span "PDF"
+                                    H.span ! A.style "padding-right: 12px;" $ ""
+                                    H.i ! class_ "fa fa-print" ! A.style "font-size: 20px;" $ ""
+
+                                li ! class_ "divider" $ ""
+
+                                li $ a ! href "/epub/ohaskell.epub" $
+                                    H.span ! A.style "color: #7cb342;" $ "EPUB"
+
+                        div ! class_ "publish-version" $
+                            "издание 2.0"
+
+                    div ! class_ "col s12 m6 l6" $ do
+                        div ! class_ "keyboard-icon" $
+                            H.i ! class_ "fa fa-keyboard-o" $ ""
+
+                        div ! class_ "practice-button" $
+                            a ! class_ "waves-effect waves-light btn btn-large amber darken-2 get-button sans"
+                              ! href "/practice/init.html" $ do
+                                "Практика"
 
 createDefault :: [ChapterPoint] -> Html
 createDefault chapterPoints = docTypeHtml ! lang "ru" $ do
@@ -105,8 +106,23 @@ createDefault chapterPoints = docTypeHtml ! lang "ru" $ do
             nav $
                 div ! class_ "nav-wrapper" $ do
                     hashtag
-                    navigation chapterPoints
-                    contacts Skip
+                    navigation chapterPoints ShowIndex
+                    contacts HideDonate
+
+        div ! class_ "container" $
+            preEscapedToHtml ("$body$" :: String)
+
+createDefaultPractice :: [ChapterPoint] -> Html
+createDefaultPractice practicePoints = docTypeHtml ! lang "ru" $ do
+    commonHead "PAGE_TITLE <- О Haskell по-человечески, Практика"
+
+    body $ do
+        div ! class_ "navbar-fixed" $
+            nav $
+                div ! class_ "nav-wrapper" $ do
+                    hashtag
+                    navigation practicePoints HideIndex
+                    contacts HideDonate
 
         div ! class_ "container" $
             preEscapedToHtml ("$body$" :: String)
@@ -149,8 +165,8 @@ createSubjectIndex chapterPoints = docTypeHtml ! lang "ru" $ do
             nav $
                 div ! class_ "nav-wrapper" $ do
                     hashtag
-                    navigation chapterPoints
-                    contacts Skip
+                    navigation chapterPoints ShowIndex
+                    contacts HideDonate
 
         div ! class_ "container" $ do
             H.h1 "Предметный указатель"
@@ -185,7 +201,7 @@ createDonate = docTypeHtml ! lang "ru" $ do
             nav $
                 div ! class_ "nav-wrapper" $ do
                     hashtag
-                    contacts Skip
+                    contacts HideDonate
 
         div ! class_ "container" $ do
             H.h1 "Поддержать проект"
@@ -233,11 +249,11 @@ contacts donate =
         addDonate
   where
     addDonate = case donate of
-        Ask  -> li $
-                    a ! href "/donate.html"
-                      ! A.title "Поддержать" $
-                        H.span ! class_ "fa fa-rub" ! A.style "font-size: 23px;" $ ""
-        Skip -> return ()
+        ShowDonate -> li $
+                          a ! href "/donate.html"
+                            ! A.title "Поддержать" $
+                              H.span ! class_ "fa fa-rub" ! A.style "font-size: 23px;" $ ""
+        HideDonate -> return ()
 
 hashtag :: Html
 hashtag =
@@ -248,24 +264,28 @@ hashtag =
             preEscapedToHtml ("&beta;" :: String)
 
 -- Оглавление и Предметный указатель для верхнего левого угла.
-navigation :: [ChapterPoint] -> Html
-navigation chapterPoints = do
+navigation :: [ChapterPoint] -> Index -> Html
+navigation chapterPoints index = do
     ul ! A.id "nav-mobile" ! class_ "left" $ do
         li $
             a ! href "#"
               ! dataAttribute "activates" "mobile-demo"
               ! class_ "button-collapse show-on-large" $
                 H.span ! class_ "fa fa-list-ul" ! A.style "font-size: 26px;" $ ""
-        li $
-            a ! href "/subject-index.html" $
-                H.span ! class_ "fa fa-tags" ! A.style "font-size: 22px;" $ ""
-
+        showIndexIfNecessary index
     -- Строим левое боковое оглавление.
     ul ! class_ "side-nav sans" ! A.id "mobile-demo" $
         mapM_ chapterPoint chapterPoints
   where
     chapterPoint :: (ChapterName, ChapterPath) -> Html
     chapterPoint (aName, anUrl) = li $ a ! href (stringValue anUrl) $ toHtml aName
+
+    showIndexIfNecessary anIndex = case anIndex of
+        ShowIndex -> li $
+                         a ! href "/subject-index.html" $
+                             H.span ! class_ "fa fa-tags" ! A.style "font-size: 22px;" $ ""
+        HideIndex -> return ()
+
 
 yandexMoneyForm :: String
 yandexMoneyForm = [r|

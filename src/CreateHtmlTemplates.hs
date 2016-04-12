@@ -56,6 +56,8 @@ createCover = docTypeHtml ! lang "ru" $ do
                         div ! class_ "read-button" $ do
                             a ! class_ "dropdown-button waves-effect waves-light btn btn-large blue accent-2 get-button sans"
                               ! href "#"
+                              ! dataAttribute "induration"  "400"
+                              ! dataAttribute "outduration" "900"
                               ! dataAttribute "activates" "dropdownRead" $
                                 "Читать"
 

@@ -96,7 +96,7 @@ createCover = docTypeHtml ! lang "ru" $ do
 
                         div ! class_ "practice-button" $
                             a ! class_ "waves-effect waves-light btn btn-large amber darken-2 get-button sans"
-                              ! href "/practice/init.html" $ do
+                              ! href "/practice/init.html" $
                                 "Практика"
 
 createDefault :: [ChapterPoint] -> Html

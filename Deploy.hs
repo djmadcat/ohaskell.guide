@@ -28,7 +28,7 @@ import System.Environment       (getArgs)
 
 main :: IO ()
 main = do
-    putStrLn $ "Собираем новую версию книги..."
+    putStrLn "Собираем новую версию книги..."
 
     shouldBeInRepoRoot
     branchShouldBeMaster
@@ -73,7 +73,7 @@ main = do
                let [commitMessage] = arguments
                git_ ["commit", "-a", "-m", commitMessage]
                git_ ["push", "origin", "master"]
-           | otherwise -> die $
+           | otherwise -> die
                "Запускайте с одним сообщением о коммите, или совсем без него."
 
     commitNPushToGhPages = do
@@ -83,12 +83,12 @@ main = do
         git_ ["push", "-f", "origin", "gh-pages"]
 
     compileBook = do
-        putStrLn $ "Компилируем..."
+        putStrLn "Компилируем..."
         callProcess "stack" ["clean"]
         callProcess "stack" ["build"]
 
     rebuildBook = do
-        putStrLn $ "Собираем..."
+        putStrLn "Собираем..."
         callProcess "stack" ["exec", "--", "ohaskell"]
 
     fullWeb            = "_site"

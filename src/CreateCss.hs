@@ -87,6 +87,11 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
     a # visited ? textDecoration none
     a # active  ? textDecoration none
 
+    p |> a # after ? do
+        content . stringContent $ "⇗"
+        paddingLeftPx   2
+        fontSizePx      14
+
     blockquote ? do
         marginLeft      nil
         paddingLeftPx   20

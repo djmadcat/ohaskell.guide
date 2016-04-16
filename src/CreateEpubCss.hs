@@ -15,6 +15,7 @@ createEpubCss pathToCss = writeFile pathToCss . L.unpack . render $ do
 
         paddingTopPx    = paddingTop . px
         paddingBottomPx = paddingBottom . px
+        paddingLeftPx   = paddingLeft . px
 
         fontSizePx      = fontSize . px
 
@@ -91,4 +92,9 @@ createEpubCss pathToCss = writeFile pathToCss . L.unpack . render $ do
         listStyleType none
         margin      nil nil nil nil
         padding     nil nil nil nil
+
+    p |> a # after ? do
+        content . stringContent $ "⇗"
+        paddingLeftPx   2
+        fontSizePx      9
 

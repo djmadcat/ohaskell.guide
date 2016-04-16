@@ -24,6 +24,11 @@ createEpubCss pathToCss = writeFile pathToCss . L.unpack . render $ do
 
         fontFaceByName aName = fontFaceSrc [FontFaceSrcUrl aName Nothing]
 
+        hrefWithArrow = do
+            content . stringContent $ "⇗"
+            paddingLeftPx 2
+            fontSizePx    9
+
     fontFace $ do
         fontPTSerif
         fontStyle       normal
@@ -97,4 +102,7 @@ createEpubCss pathToCss = writeFile pathToCss . L.unpack . render $ do
         content . stringContent $ "⇗"
         paddingLeftPx   2
         fontSizePx      9
+
+    p  |>       a # after ? hrefWithArrow
+    ol |> li |> a # after ? hrefWithArrow
 

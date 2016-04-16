@@ -48,6 +48,11 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
             paddingLeftPx   3
             paddingRightPx  3
 
+        hrefWithArrow = do
+            content . stringContent $ "⇗"
+            paddingLeftPx   2
+            fontSizePx      14
+
     importUrl "https://fonts.googleapis.com/css?family=PT+Sans:400|PT+Serif:400,700,400italic|Ubuntu+Mono:400,400italic,700&subset=latin,cyrillic"
 
     body ? do
@@ -87,10 +92,8 @@ createCss = writeFile "static/css/default.css" . L.unpack . render $ do
     a # visited ? textDecoration none
     a # active  ? textDecoration none
 
-    p |> a # after ? do
-        content . stringContent $ "⇗"
-        paddingLeftPx   2
-        fontSizePx      14
+    p  |>       a # after ? hrefWithArrow
+    ol |> li |> a # after ? hrefWithArrow
 
     blockquote ? do
         marginLeft      nil

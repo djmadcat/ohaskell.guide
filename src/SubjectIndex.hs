@@ -48,6 +48,10 @@ subjectIndex =
                                             ]
       )
 
+    , ("newtype",                           [ ("Новый тип", "")
+                                            ]
+      )
+
     , ("space leak",                        [ ("Лень", "Space leak")
                                             ]
       )

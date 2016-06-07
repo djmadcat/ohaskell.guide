@@ -157,7 +157,7 @@ $ stack new real simple
 ```bash
 ├── LICENSE
 ├── Setup.hs
-├── real2.cabal
+├── real.cabal
 ├── src
 │   └── Main.hs <- Единственный модуль
 └── stack.yaml

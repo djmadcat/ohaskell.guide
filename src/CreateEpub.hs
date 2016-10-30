@@ -11,7 +11,6 @@ import           CreateEpubCss
 
 createEpub :: FilePath -> IO ()
 createEpub pathToSingleMarkdown = do
-    home <- getHomeDirectory
     createEpubCss pathToCss
     callCommand $ concat [ "pandoc -S -o "
                          , out
@@ -21,9 +20,9 @@ createEpub pathToSingleMarkdown = do
                          , " --epub-embed-font="
                          , mainFont
                          , " --epub-embed-font="
-                         , codeFontNormal home
+                         , codeFontNormal
                          , " --epub-embed-font="
-                         , codeFontBold home
+                         , codeFontBold
                          , " --epub-cover-image="
                          , cover
                          , " "
@@ -37,13 +36,7 @@ createEpub pathToSingleMarkdown = do
     title     = "epub/EPUBTitle.txt"
     cover     = "epub/cover.png"
 
-    -- Пути актуальны для OS X. Подразумевается,
-    -- что данные шрифты уже установлены.
-    mainFont = "/Library/Fonts/PTSerif.ttc"
-
-    codeFontNormal :: FilePath -> FilePath
-    codeFontNormal h = h ++ "/Library/Fonts/UbuntuMono-Regular.ttf"
-
-    codeFontBold :: FilePath -> FilePath
-    codeFontBold h = h ++ "/Library/Fonts/UbuntuMono-Bold.ttf"
-
+    -- Пути актуальны для Linux. Подразумевается, что данные шрифты уже установлены.
+    mainFont        = "$HOME/.fonts/PT_Sans/PT_Sans-Web-Regular.ttf"
+    codeFontNormal  = "/usr/share/fonts/truetype/ubuntu-font-family/UbuntuMono-R.ttf"
+    codeFontBold    = "/usr/share/fonts/truetype/ubuntu-font-family/UbuntuMono-B.ttf"
